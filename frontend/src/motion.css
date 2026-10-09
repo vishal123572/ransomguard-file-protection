@@ -1,0 +1,52 @@
+@keyframes rg-enter {
+  from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes rg-ring {
+  0%, 100% { opacity: .2; transform: scale(.96); }
+  50% { opacity: .65; transform: scale(1.04); }
+}
+
+@keyframes rg-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes rg-status {
+  0%, 100% { box-shadow: 0 0 0 0 #6aa67700; }
+  50% { box-shadow: 0 0 0 5px #6aa67718; }
+}
+
+@keyframes rg-modal {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-art > div { animation: rg-enter .8s cubic-bezier(.2,.75,.25,1) both; }
+.auth-form main { animation: rg-enter .65s cubic-bezier(.2,.75,.25,1) .12s both; }
+.radar > i { animation: rg-ring 5.5s ease-in-out infinite; }
+.radar > i:nth-child(2) { animation-delay: .8s; }
+.radar > i:nth-child(3) { animation-delay: 1.6s; }
+
+.heading, .split > *, .main > main > .panel, .stats .stat, .tasks .task-card {
+  animation: rg-enter .55s cubic-bezier(.2,.75,.25,1) both;
+}
+.stats .stat:nth-child(2) { animation-delay: .07s; }
+.stats .stat:nth-child(3) { animation-delay: .14s; }
+.stats .stat:nth-child(4) { animation-delay: .21s; }
+.split > :nth-child(2) { animation-delay: .1s; }
+.tasks .task-card:nth-child(2) { animation-delay: .07s; }
+.tasks .task-card:nth-child(3) { animation-delay: .14s; }
+
+.bars b { transform-origin: left center; animation: rg-bar .85s cubic-bezier(.2,.75,.25,1) both; }
+.status > span i { animation: rg-status 2.8s ease-in-out infinite; }
+.task-card, .stat, .panel, .btn, .icon, .list > nav button { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease; }
+.stat:hover, .task-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px #1733220d; }
+.btn:hover:not(:disabled) { transform: translateY(-1px); }
+.modal[open] { animation: rg-modal .24s cubic-bezier(.2,.75,.25,1) both; }
+.toast { animation: rg-enter .28s cubic-bezier(.2,.75,.25,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

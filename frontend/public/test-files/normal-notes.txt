@@ -1,0 +1,1 @@
+Project review notes. Confirm backups, keep software updated, and use strong passwords. This harmless plain-text file has no suspicious filename indicators. Expected result: CLEAN, score 0/100.

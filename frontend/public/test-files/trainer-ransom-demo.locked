@@ -1,0 +1,1 @@
+HARMLESS RANSOMGUARD TRAINER TEST. This is plain text, not malware or an encrypted file. Its name includes ransom and its extension is .locked to demonstrate filename heuristics. Expected result: HIGH_RISK, score 95/100. No executable code is included.

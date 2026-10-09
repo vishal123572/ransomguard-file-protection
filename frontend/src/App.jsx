@@ -38,6 +38,20 @@ const Field = ({ title, hint, children }) => <label className="field"><span>{tit
 const Empty = ({ icon = 'file', title, text, action }) => <div className="empty"><span><Icon name={icon} size={28}/></span><h3>{title}</h3><p>{text}</p>{action}</div>
 const Loading = () => <div className="loading"><i/> Loading your protection workspace…</div>
 
+function TrainerLogin() {
+  const email = import.meta.env.VITE_DEMO_ADMIN_EMAIL
+  const password = import.meta.env.VITE_DEMO_ADMIN_PASSWORD
+  if (!email || !password) return null
+  return <section className="trainer-login" aria-label="Trainer admin login">
+    <span className="eyebrow">TRAINER DEMO ACCESS</span>
+    <h3>Admin login</h3>
+    <dl><div><dt>Email</dt><dd>{email}</dd></div><div><dt>Password</dt><dd><code>{password}</code></dd></div></dl>
+    <p>Use these details to sign in and review users, file checks, and prevention tasks.</p>
+    <a href="/test-files/trainer-ransom-demo.locked" download>Download harmless test file <Icon name="file" size={15}/></a>
+    <small>Plain text only. Upload it to File checks to see a high-risk filename result.</small>
+  </section>
+}
+
 function Auth({ register, onAuth }) {
   const [busy, setBusy] = useState(false), [error, setError] = useState('')
   async function submit(event) {
@@ -45,7 +59,7 @@ function Auth({ register, onAuth }) {
     try { const { data } = await api.post(register ? '/auth/register' : '/auth/login', Object.fromEntries(new FormData(event.currentTarget))); sessionStorage.setItem('ransomguard-token', data.token); onAuth(data.user) }
     catch (e) { setError(errorMessage(e)) } finally { setBusy(false) }
   }
-  return <div className="auth"><section className="auth-art"><Brand/><div><span className="eyebrow">FILE PROTECTION, IN FOCUS</span><h1>Spot the signal.<br/>Protect every <em>file.</em></h1><p>Upload a file for a safe ransomware-risk check, coordinate response, and keep your team ahead of threats.</p><div className="radar"><i/><i/><i/><span><Icon name="scan" size={62}/></span><b>Heuristic check complete</b></div></div><small>RANSOMGUARD / FILE SAFETY WORKSPACE</small></section><section className="auth-form"><div className="auth-top">FILE PROTECTION <span>TEAM EDITION</span></div><main><span className="eyebrow">{register ? 'JOIN THE TEAM' : 'WELCOME BACK'}</span><h2>{register ? 'Build a safer file culture.' : 'Your files deserve a defense.'}</h2><p>{register ? 'Create an employee account to check files and complete prevention work.' : 'Sign in to your RansomGuard workspace.'}</p><ErrorBox text={error}/><form onSubmit={submit}>{register && <Field title="Full name"><input name="name" required maxLength={100} placeholder="Your full name"/></Field>}<Field title="Work email"><input name="email" type="email" required maxLength={180} placeholder="you@company.com"/></Field><Field title="Password" hint={register ? 'Use at least 10 characters.' : ''}><input name="password" type="password" required minLength={register ? 10 : 1} maxLength={72} placeholder={register ? 'Create a strong password' : 'Enter your password'}/></Field><button className="btn primary wide" disabled={busy}>{busy ? 'Please wait…' : register ? 'Create employee account' : 'Sign in to workspace'}<Icon name="arrow"/></button></form><p className="switch">{register ? 'Already part of the team?' : 'New to RansomGuard?'} <Link to={register ? '/login' : '/register'}>{register ? 'Sign in' : 'Create an account'}</Link></p><footer><Icon name="lock" size={15}/> Files are analyzed without execution and are not retained.</footer></main><small>RansomGuard © {new Date().getFullYear()}</small></section></div>
+  return <div className="auth"><section className="auth-art"><Brand/><div><span className="eyebrow">FILE PROTECTION, IN FOCUS</span><h1>Spot the signal.<br/>Protect every <em>file.</em></h1><p>Upload a file for a safe ransomware-risk check, coordinate response, and keep your team ahead of threats.</p><div className="radar"><i/><i/><i/><span><Icon name="scan" size={62}/></span><b>Heuristic check complete</b></div></div><small>RANSOMGUARD / FILE SAFETY WORKSPACE</small></section><section className="auth-form"><div className="auth-top">FILE PROTECTION <span>TEAM EDITION</span></div><main><span className="eyebrow">{register ? 'JOIN THE TEAM' : 'WELCOME BACK'}</span><h2>{register ? 'Build a safer file culture.' : 'Your files deserve a defense.'}</h2><p>{register ? 'Create an employee account to check files and complete prevention work.' : 'Sign in to your RansomGuard workspace.'}</p><ErrorBox text={error}/><form onSubmit={submit}>{register && <Field title="Full name"><input name="name" required maxLength={100} placeholder="Your full name"/></Field>}<Field title="Work email"><input name="email" type="email" required maxLength={180} placeholder="you@company.com"/></Field><Field title="Password" hint={register ? 'Use at least 10 characters.' : ''}><input name="password" type="password" required minLength={register ? 10 : 1} maxLength={72} placeholder={register ? 'Create a strong password' : 'Enter your password'}/></Field><button className="btn primary wide" disabled={busy}>{busy ? 'Please wait…' : register ? 'Create employee account' : 'Sign in to workspace'}<Icon name="arrow"/></button></form>{!register && <TrainerLogin/>}<p className="switch">{register ? 'Already part of the team?' : 'New to RansomGuard?'} <Link to={register ? '/login' : '/register'}>{register ? 'Sign in' : 'Create an account'}</Link></p><footer><Icon name="lock" size={15}/> Files are analyzed without execution and are not retained.</footer></main><small>RansomGuard © {new Date().getFullYear()}</small></section></div>
 }
 
 function Modal({ title, text, children, close, wide }) {

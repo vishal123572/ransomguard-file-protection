@@ -1,5 +1,9 @@
 # Ransomware Detection and File Protection System
 
+The login page can display public trainer demo access when `VITE_DEMO_ADMIN_EMAIL` and `VITE_DEMO_ADMIN_PASSWORD` are supplied at build time. These values are intentionally visible to site visitors. Local values belong in the ignored `frontend/.env.local` file.
+
+Harmless upload samples are available in `frontend/public/test-files`: `trainer-ransom-demo.locked` produces a HIGH_RISK filename result (95/100), and `normal-notes.txt` produces CLEAN (0/100). Both contain plain text only.
+
 RansomGuard is a React and Spring Boot application for safe file-risk checks and ransomware prevention tasks. Employees upload files for non-executing heuristic analysis, view their results, and complete assigned tasks. Administrators manage users, review file-risk reports, assign and approve tasks, and inspect the application's MySQL tables.
 
 ## Live application
